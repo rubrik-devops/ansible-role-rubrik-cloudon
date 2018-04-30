@@ -65,7 +65,11 @@ The description of the Security Group configured to allow the ports required for
 
 The description of the Security Group port roles configured for Rubrik CloudOn
 
+**Required (`vars/main.yml`)**
 
+`s3_bucket_arn`
+
+The dynamically generated ARN of the S3 bucket provided in the `s3_bucket_name` variable and used in the `s3_security_policy.json.j2` template.
 
 Dependencies
 ------------
