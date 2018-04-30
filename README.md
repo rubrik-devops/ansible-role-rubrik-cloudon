@@ -89,7 +89,7 @@ Example Playbook
 License
 -------
 
-BSD
+GPLv3
 
 Author Information
 ------------------
