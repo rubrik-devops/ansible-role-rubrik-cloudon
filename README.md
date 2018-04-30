@@ -78,7 +78,7 @@ Example Playbook
     - hosts: localhost
       gather_facts: false
       roles:
-        - rubrik-devops.aws-vmimport-role
+        - rubrik-devops.rubrik-cloudon
       vars:
         s3_bucket_name: "example-bucket"
         iam_user_temp_password: "example-password"
