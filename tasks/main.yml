@@ -52,7 +52,6 @@
       filters:
         name: "rubrik-*"
       region: "{{ aws_region }}"
-      # region: us-west-2
   register: rubrik_ami
 
 
