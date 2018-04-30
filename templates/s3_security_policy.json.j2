@@ -1,0 +1,63 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "iam:CreateRole",
+                "iam:PutRolePolicy",
+                "ec2:CancelConversionTask",
+                "ec2:CancelExportTask",
+                "ec2:CreateImage",
+                "ec2:CreateInstanceExportTask",
+                "ec2:CreateTags",
+                "ec2:DeleteTags",
+                "ec2:DescribeConversionTasks",
+                "ec2:DescribeExportTasks",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:DescribeInstanceStatus",
+                "ec2:DescribeInstances",
+                "ec2:DescribeImages",
+                "ec2:DescribeSecurityGroups",
+                "ec2:RunInstances",
+                "ec2:DescribeTags",
+                "ec2:DescribeVolumes",
+                "ec2:ImportInstance",
+                "ec2:ImportVolume",
+                "ec2:DeleteVolume",
+                "ec2:DeregisterImage",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:TerminateInstances",
+                "ec2:ImportImage",
+                "ec2:ImportSnapshot",
+                "ec2:DescribeImportImageTasks",
+                "ec2:DescribeImportSnapshotTasks",
+                "ec2:CancelImportTask",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DeleteSnapshot"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:CreateBucket",
+                "s3:ListBucket",
+                "s3:DeleteObject",
+                "s3:GetBucketLocation",
+                "s3:DeleteBucket"
+            ],
+            "Resource": [
+                "{{  s3_bucket_arn }}",
+                "{{  s3_bucket_arn }}/*"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+---
+# S3 Security Policy
+s3_security_policy_name: rubrik_cloudon
+s3_security_policy_description: "Security policy used for Rubrik CloudOn."
+
+# IAM User 
+iam_user: rubrik-cloudon
+
+# Security Group
+security_group_name: rubrik-cloudon
+security_group_description: "Security group used for Rubrik CloudOn"
+security_group_role_description: "Ports required for Rubrik CloudOn"

@@ -1,0 +1,77 @@
+---
+# tasks file for rubrik-cloudon
+- name: Create the S3 Bucket
+  aws_s3:
+    bucket: "{{ s3_bucket_name }}"
+    region: "{{ aws_region }}"
+    mode: create
+
+- name: Create the a Security Policy for the S3 Bucket
+  iam_managed_policy:
+    policy_name: "{{ s3_security_policy_name }}"
+    policy_description: "{{ s3_security_policy_description }}"
+    policy: " {{ lookup( 'template', 's3_security_policy.json.j2', convert_data=False) }}  "
+    state: present
+  register: aws
+
+- name: Create a IAM User with Programatic Access
+  iam:
+    iam_type: user
+    name: "{{ iam_user }}"
+    state: present
+    password: "{{ iam_user_temp_password }}"
+    access_key_state: create
+  register: iam
+
+- name: Attach the Security Policy to the IAM User
+  iam_user:
+    name: "{{ iam_user }}"
+    managed_policy: "{{ aws.policy.arn }}"
+    state: present
+
+- include_role:
+    name: rubrik-devops.aws-vmimport-role
+
+- name: Create the required Security Group
+  ec2_group:
+    name: "{{ security_group_name }}"
+    description: "{{ security_group_description }}"
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ aws_region }}"
+    rules:
+      - proto: tcp
+        ports:
+        - 2002
+        - 7780
+        cidr_ip: "{{ on_prem_rubrik_cidr }}"
+        rule_desc: "{{ security_group_role_description }}"
+  register: security_group
+
+- name: Verify the Rubrik AMI has been shared by Rubrik Support
+  ec2_ami_facts:
+      filters:
+        name: "rubrik-*"
+      region: "{{ aws_region }}"
+      # region: us-west-2
+  register: rubrik_ami
+
+
+- fail: 
+    msg: "The Rubrik AMI has not been shared in the {{ aws_region}} region"
+  when: rubrik_ami.images|length == 0
+
+# - debug:
+#     msg: "{{ rubrik_ami.images }}"
+
+# - debug:
+#     msg: "{{ rubrik_ami.results }}"
+
+# - debug:
+#     msg: "{{ security_group.group_id }}"
+
+# - debug:
+#     msg: Access Key - "{{ iam.user_meta.access_keys[0].access_key_id }}"
+
+# - debug:
+#     msg: Secret Key - "{{ iam.user_meta.access_keys[0].secret_access_key }}"
+  
