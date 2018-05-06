@@ -8,5 +8,5 @@ iam_user: rubrik-cloudon
 
 # Security Group
 security_group_name: rubrik-cloudon
-security_group_description: "Security group used for Rubrik CloudOn"
-security_group_role_description: "Ports required for Rubrik CloudOn"
+security_group_description: "Security group used for Rubrik CloudOn."
+security_group_role_description: "Ports required for Rubrik CloudOn."

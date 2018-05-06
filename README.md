@@ -12,7 +12,6 @@ The follow requirements were pulled from the various AWS Modules used in this ro
 * boto3
 * botocore
 * python >= 2.6
-* botocore
 
 Role Variables
 --------------
