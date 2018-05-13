@@ -18,57 +18,30 @@ Role Variables
 
 **Required**
 
-`s3_bucket_name`
-
-The name of the S3 bucket where Rubrik will store archived snapshots.
-
-`iam_user_temp_password`
-
-The password used when creating a Rubrik CloudOn specific IAM User. Please note that this password must conform to your Account Password policy.
-
-`on_prem_rubrik_cidr`
-
-The IP Address plus CIDR notation of the Rubrik On-Prem Cluster. 
-
-`vpc_id`
-
-The VPC ID where the Rubrik Bolt instance will be dynamically created and destroyed.
-
-`aws_region`
-
-The specific AWS region where the configurations will occur. Please use the "region" options listed in the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) as values.
+| Variable  |  Description |
+|---|---|
+| s3_bucket_name  | The name of the S3 bucket where Rubrik will store archived snapshots.  |
+| iam_user_temp_password  | The password used when creating a Rubrik CloudOn specific IAM User. Please note that this password must conform to your Account Password policy.  |
+| on_prem_rubrik_cidr  | The IP Address plus CIDR notation of the Rubrik On-Prem Cluster. |
+| vpc_id  | The VPC ID where the Rubrik Bolt instance will be dynamically created and destroyed.  |
+| aws_region | The specific AWS region where the configurations will occur. Please use the "region" options listed in the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) as values. |
 
 **Default (see `defaults/main.yml`)**
 
-`s3_security_policy_name: rubrik_cloudon`
-
-The name of the IAM Policy that has all required permissions for Rubrik CloudOn.
-
-`s3_security_policy_description: "Security policy used for Rubrik CloudOn."`
-
-The description of the IAM Policy that has all required permissions for Rubrik CloudOn.
-
-`iam_user: rubrik-cloudon`
-
-The name of the IAM User that will be associated with RubrikCloud IAM Policy created during this process.
-
-`security_group_name: rubrik-cloudon`
-
-The name of the Security Group configured to allow the ports required for Rubrik CloudOn.
-
-`security_group_description: "Security group used for Rubrik CloudOn"`
-
-The description of the Security Group configured to allow the ports required for Rubrik CloudOn.
-
-`security_group_role_description: "Ports required for Rubrik CloudOn"`
-
-The description of the Security Group port roles configured for Rubrik CloudOn
+| Variable  |  Default | Description  |
+|---|---|---|
+| s3_security_policy_name  | rubrik_cloudon  | The name of the IAM Policy that has all required permissions for Rubrik CloudOn.|
+| s3_security_policy_description  | Security policy used for Rubrik CloudOn.  | The description of the IAM Policy that has all required permissions for Rubrik CloudOn.|
+| iam_user  | rubrik-cloudon  | The name of the IAM User that will be associated with RubrikCloud IAM Policy created during this process.|
+| security_group_name  | rubrik-cloudon  | The name of the Security Group configured to allow the ports required for Rubrik CloudOn. |
+| security_group_description  | Security group used for Rubrik CloudOn  | The description of the Security Group configured to allow the ports required for Rubrik CloudOn.|
+| security_group_role_description  | Ports required for Rubrik CloudOn  | The description of the Security Group port roles configured for Rubrik CloudOn |
 
 **Dynamically Generated (`vars/main.yml`)**
 
-`s3_bucket_arn`
-
-The dynamically generated ARN of the S3 bucket provided in the `s3_bucket_name` variable and used in the `s3_security_policy.json.j2` template.
+| Variable  |  Description |
+|---|---|
+| s3_bucket_arn  | The dynamically generated ARN of the S3 bucket provided in the `s3_bucket_name` variable and used in the `s3_security_policy.json.j2` template.  |
 
 Dependencies
 ------------
