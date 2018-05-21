@@ -19,9 +19,9 @@
     iam_type: user
     name: "{{ iam_user }}"
     state: present
-    password: "{{ iam_user_temp_password }}"
     access_key_state: create
   register: iam
+  when: create_new_user
 
 - name: Attach the Security Policy to the IAM User
   iam_user:
@@ -54,10 +54,21 @@
       region: "{{ aws_region }}"
   register: rubrik_ami
 
-
 - fail: 
     msg: "The Rubrik AMI has not been shared in the {{ aws_region}} region"
   when: rubrik_ami.images|length == 0
+
+- set_fact: 
+     key: "{{ iam.user_meta.access_keys[0] }}"
+  when: create_new_user
+
+- debug:
+    msg: Access Key - {{ key.access_key_id }}
+  when: create_new_user
+
+- debug:
+    msg: Secret Key - {{ key.secret_access_key }}
+  when: "create_new_user and 'secret_access_key' in key"
 
 # - debug:
 #     msg: "{{ rubrik_ami.images }}"
@@ -68,9 +79,4 @@
 # - debug:
 #     msg: "{{ security_group.group_id }}"
 
-# - debug:
-#     msg: Access Key - "{{ iam.user_meta.access_keys[0].access_key_id }}"
-
-# - debug:
-#     msg: Secret Key - "{{ iam.user_meta.access_keys[0].secret_access_key }}"
   
