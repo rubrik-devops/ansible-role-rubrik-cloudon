@@ -1,6 +1,6 @@
 ---
 # S3 Security Policy
-s3_security_policy_name: rubrik_cloudon
+s3_security_policy_name: rubrik-cloudon
 s3_security_policy_description: "Security policy used for Rubrik CloudOn."
 
 # IAM User
