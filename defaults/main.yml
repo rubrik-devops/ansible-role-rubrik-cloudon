@@ -5,7 +5,7 @@ s3_security_policy_description: "Security policy used for Rubrik CloudOn."
 
 # IAM User
 create_new_user: true
-iam_user: rubrik-cloudon
+iam_user: rubrik
 
 # Security Group
 security_group_name: rubrik-cloudon
